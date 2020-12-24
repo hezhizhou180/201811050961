@@ -1,53 +1,46 @@
-#include <stdio.h>
-#include <string.h>
-#include <assert.h>
-
-void print_second(int n,int m,int c,char a[100][100])
-{
-    int i=0;
-    int j=0;
-	for(i=0;i<c;i++)
-	{
-		for(i=1; i<=m; i++)
-		{
-			for(j=1; j<n; j++)
-			{
-				if(a[j][i]=='X')
-				{
-					a[j-1][i]='X';
-					a[j+1][i]='X';
-					a[j][i-1]='X';
-					a[j][i+1]='X';
-				}
-				
-			}
-		}
-}
-}
-int main()
-{   
-    int n;
-	int m;
-	int c;
+#include "stdio.h"
+void main(){
+	int M,N,c;
 	char a[100][100];
-	int i=0;
-    int j=0;
-	scanf("%d%d",&m,&n);
-    for(i=1; i<=m; i++)
-    {
-        for(j=1; j<=n; j++)
-        {
-            scanf("%c", &a[i][j]);
-        }
+	int i,j;
+
+	printf("ÇëÊäÈë³¤ºÍ¿í\n");
+	scanf("%d%d",&N,&M);
+	for(i=0;i<M;i++){
+		for(j=0;j<N+1;j++){
+			scanf("%c",&a[i][j]);
+		}
 	}
 	scanf("%d",&c);
-    print_second(n,m,c,a);
-	for (i = 1; i <= m; i++)
-    {
-        for ( j = 1; j <= n; j++)
-        {
-            printf("%c",&a[i][j]);
+	for(i=0;i<c;i++)
+	{
+		for(i=0; i<M; i++)
+		{
+			for(j=0; j<N+1; j++)
+			{
+				if(a[i][j]=='X')
+				{
+					if(a[i-1][j]=='O'&&a[i-1-1][j]!='P'&&a[i-1+1][j]!='P'&&a[i-1][j-1]!='P'&&a[i-1][j+1]!='P')
+						a[i-1][j]='X';
+					if(a[i+1][j]=='O'&&a[i+1-1][j]!='P'&&a[i+1+1][j]!='P'&&a[i+1][j-1]!='P'&&a[i+1][j+1]!='P')
+						a[i+1][j]='X';
+					if(a[i][j-1]=='O'&&a[i-1][j-1]!='P'&&a[i+1][j-1]!='P'&&a[i][j-1-1]!='P'&&a[i][j-1+1]!='P')
+						a[i][j-1]='X';
+					if(a[i][j+1]=='O'&&a[i-1][j+1]!='P'&&a[i+1][j+1]!='P'&&a[i][j+1-1]!='P'&&a[i][j+1+1]!='P')
+						a[i][j+1]='X';
+
+
+				}
+			}
+		}
+		
+
+	}
+	
+	for(i=0;i<M;i++){
+		for(j=0;j<N+1;j++){
+			printf("%c",a[i][j]);
 		}
 	}
-	return 0;
+	printf("\n");
 }
